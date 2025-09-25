@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My EC2 Practice Site</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:40px; background:#f6f8fa; color:#222; }
+    header { text-align:center; margin-bottom:30px; }
+    h1 { color:#0b63b6; }
+    .card { background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); max-width:700px; margin:0 auto; }
+    .btn { display:inline-block; padding:10px 16px; margin-top:12px; border-radius:6px; text-decoration:none; background:#0b63b6; color:white; }
+    footer { text-align:center; margin-top:30px; color:#666; font-size:14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to My EC2 Practice Site</h1>
+    <p>Testing a simple static website on an EC2 instance</p>
+  </header>
+
+  <div class="card">
+    <h2>About this page</h2>
+    <p>This is a plain HTML page you can use to test Apache / Nginx on EC2. Edit this file to try changes, then refresh your browser.</p>
+
+    <h3>Quick checks</h3>
+    <ul>
+      <li>Server time: <span id="time">loading...</span></li>
+      <li>Server hostname: <span id="host">loading...</span></li>
+    </ul>
+
+    <a class="btn" href="#" id="refreshBtn">Get server info</a>
+  </div>
+
+  <footer>
+    Built for EC2 practice. &nbsp;|&nbsp; Tip: change this file and refresh the page.
+  </footer>
+
+  <script>
+    // Try to fetch server info from simple endpoints (optional)
+    document.getElementById('refreshBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      // These endpoints won't work unless you create them on the server.
+      fetch('/server-time.txt').then(r => r.text()).then(t => document.getElementById('time').textContent = t).catch(()=>document.getElementById('time').textContent = 'not available');
+      fetch('/hostname.txt').then(r => r.text()).then(t => document.getElementById('host').textContent = t).catch(()=>document.getElementById('host').textContent = 'not available');
+    });
+  </script>
+</body>
+</html>
+
